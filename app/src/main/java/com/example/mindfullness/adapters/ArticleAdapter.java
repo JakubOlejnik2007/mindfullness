@@ -3,14 +3,18 @@ package com.example.mindfullness.adapters;
 import com.example.mindfullness.types.Article;
 import com.example.mindfullness.R;
 
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHolder> {
@@ -36,10 +40,13 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        Article article = dataSet.get(position);
         TextView textViewTitle = holder.itemView.findViewById(R.id.textViewTitle);
-        textViewTitle.setText(dataSet.get(position).title);
+        textViewTitle.setText(article.title);
         TextView textViewBody = holder.itemView.findViewById(R.id.textViewBody);
-        textViewBody.setText(dataSet.get(position).content);
+        textViewBody.setText(article.content);
+        ImageView articleThumbnail = holder.itemView.findViewById(R.id.articleThumbnail);
+        article.loadImageIntoImageView(articleThumbnail);
     }
 
     @Override

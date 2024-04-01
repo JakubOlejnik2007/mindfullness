@@ -52,7 +52,7 @@ public class Home extends Fragment {
                     ArrayList<Article> articles = new ArrayList<>();
                     for (int i = 0; i < articlesArray.length(); i++) {
                         JSONObject article = articlesArray.getJSONObject(i);
-                        Article articleCasted = new Article(article.getString("title"), article.getString("body"));
+                        Article articleCasted = new Article(article.getString("title"), article.getString("body"), "https://via.placeholder.com/120/d32776");
                         articles.add(articleCasted);
                     }
 
