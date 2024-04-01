@@ -38,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
             }
 
             item.setTitle(getResources().getString(getTitleResById(item.getItemId())));
-
             return NavigationUI.onNavDestinationSelected(item, navController);
         });
     }
