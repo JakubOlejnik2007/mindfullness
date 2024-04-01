@@ -4,22 +4,18 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
-
 import com.example.mindfullness.databinding.FragmentMapBinding;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
-
 import org.osmdroid.config.Configuration;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
@@ -56,7 +52,23 @@ public class Map extends Fragment {
             return;
         }
 
-
+        fusedLocationClient.requestLocationUpdates(
+                LocationRequest.create(),
+                new LocationCallback() {
+                    @Override
+                    public void onLocationResult(LocationResult locationResult) {
+                        super.onLocationResult(locationResult);
+                        if (locationResult != null && locationResult.getLastLocation() != null) {
+                            currentLocation = locationResult.getLastLocation();
+                            MapView map = binding.map;
+                            map.getController().setCenter(new GeoPoint(currentLocation.getLatitude(), currentLocation.getLongitude()));
+                            map.getController().setZoom(15);
+                            // Remove location updates after receiving location
+                            fusedLocationClient.removeLocationUpdates(this);
+                        }
+                    }
+                },
+                null); // Optional Looper parameter if you want to specify the thread where the callback will be executed
     }
 
 
