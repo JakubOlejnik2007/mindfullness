@@ -107,7 +107,7 @@ public class Map extends Fragment {
             parkMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
             map.getOverlays().add(parkMarker);
         }
-        map.invalidate(); // Konieczne odświeżenie mapy, aby zobaczyć markery
+        map.invalidate();
     }
 
     @Override

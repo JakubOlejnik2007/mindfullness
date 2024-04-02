@@ -27,9 +27,9 @@ public class GetNearbyParks {
         // Adres URL zapytania Overpass API
         String overpassUrl = "https://overpass-api.de/api/interpreter?data=" +
                 "[out:json];" +
-                "(node[\"leisure\"=\"park\"](around:50000," + currentLocation.getLatitude() + "," + currentLocation.getLongitude() + ");" +
-                "way[\"leisure\"=\"park\"](around:50000," + currentLocation.getLatitude() + "," + currentLocation.getLongitude() + ");" +
-                "relation[\"leisure\"=\"park\"](around:50000," + currentLocation.getLatitude() + "," + currentLocation.getLongitude() + "););" +
+                "(node[\"leisure\"=\"park\"](around:20000," + currentLocation.getLatitude() + "," + currentLocation.getLongitude() + ");" +
+                "way[\"leisure\"=\"park\"](around:20000," + currentLocation.getLatitude() + "," + currentLocation.getLongitude() + ");" +
+                "relation[\"leisure\"=\"park\"](around:20000," + currentLocation.getLatitude() + "," + currentLocation.getLongitude() + "););" +
                 "out;";
 
         // Wysłanie zapytania HTTP i obsługa odpowiedzi
