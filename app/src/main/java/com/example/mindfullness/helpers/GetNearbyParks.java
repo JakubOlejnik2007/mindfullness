@@ -27,11 +27,14 @@ public class GetNearbyParks {
         // Adres URL zapytania Overpass API
         String overpassUrl = "https://overpass-api.de/api/interpreter?data=" +
                 "[out:json];" +
-                "(node[\"leisure\"=\"park\"](around:20000," + currentLocation.getLatitude() + "," + currentLocation.getLongitude() + ");" +
-                "way[\"leisure\"=\"park\"](around:20000," + currentLocation.getLatitude() + "," + currentLocation.getLongitude() + ");" +
-                "relation[\"leisure\"=\"park\"](around:20000," + currentLocation.getLatitude() + "," + currentLocation.getLongitude() + "););" +
+                "(node[\"leisure\"=\"park\"](around:10000," + currentLocation.getLatitude() + "," + currentLocation.getLongitude() + ");" +
+                "way[\"leisure\"=\"park\"](around:10000," + currentLocation.getLatitude() + "," + currentLocation.getLongitude() + ");" +
+                "relation[\"leisure\"=\"park\"](around:10000," + currentLocation.getLatitude() + "," + currentLocation.getLongitude() + ");" +
+                "node[\"landuse\"=\"recreation_ground\"](around:10000," + currentLocation.getLatitude() + "," + currentLocation.getLongitude() + ");" +
+                "way[\"landuse\"=\"recreation_ground\"](around:10000," + currentLocation.getLatitude() + "," + currentLocation.getLongitude() + ");" +
+                "relation[\"landuse\"=\"recreation_ground\"](around:10000," + currentLocation.getLatitude() + "," + currentLocation.getLongitude() + "););" +
                 "out;";
-
+        Log.d("ParkiURL", overpassUrl);
         // Wysłanie zapytania HTTP i obsługa odpowiedzi
         HTTPJson httpJson = new HTTPJson();
         httpJson.sendGetRequest(overpassUrl, new HTTPJson.OnResponseListener() {
