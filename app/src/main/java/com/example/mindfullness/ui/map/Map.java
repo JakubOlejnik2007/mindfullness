@@ -79,8 +79,17 @@ public class Map extends Fragment {
 
                             // Wywołanie funkcji do pobrania lokalizacji parków
                             GetNearbyParks get = new GetNearbyParks();
-                            Log.d("Parki", "Fetching parks");
-                            parksArray = get.getNearbyParks(currentLocation);
+                            get.getNearbyParks(currentLocation, new GetNearbyParks.ParksCallback() {
+                                @Override
+                                public void onParksReceived(ArrayList<Park> parksArray) {
+                                    addParkMarkers(binding.map, parksArray);
+                                }
+
+                                @Override
+                                public void onError(String error) {
+                                    Log.e("Błąd", error);
+                                }
+                            });
                         }
                     }
                 },
@@ -90,6 +99,7 @@ public class Map extends Fragment {
     private void addParkMarkers(MapView map, ArrayList<Park> parksArray) {
         Log.d("Parki", "Drawing markers");
         for (Park park : parksArray) {
+            Log.d("ParkiMarkers", park.getParkInfo());
             GeoPoint parkLocation = new GeoPoint(park.getLatitude(), park.getLongitude());
             Marker parkMarker = new Marker(map);
             parkMarker.setPosition(parkLocation);

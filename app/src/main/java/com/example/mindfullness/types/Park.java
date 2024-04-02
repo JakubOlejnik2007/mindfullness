@@ -173,6 +173,10 @@ public class Park {
     public String getName() {
         return name;
     }
+
+    public String getParkInfo() {
+        return String.format("%s, %.2f, %.2f", this.name, this.latitude, this.longitude);
+    }
 }
 
 

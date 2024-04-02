@@ -12,13 +12,16 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class GetNearbyParks {
-    public ArrayList<Park> getNearbyParks(Location currentLocation) {
+    public interface ParksCallback {
+        void onParksReceived(ArrayList<Park> parksArray);
+        void onError(String error);
+    }
 
-        ArrayList<Park> parksArray = new ArrayList<>();
+    public void getNearbyParks(Location currentLocation, ParksCallback callback) {
 
         if (currentLocation == null) {
-            Log.e("Mapa", "Brak dostępu do lokalizacji");
-            return parksArray;
+            callback.onError("Brak dostępu do lokalizacji");
+            return;
         }
 
         // Adres URL zapytania Overpass API
@@ -34,27 +37,27 @@ public class GetNearbyParks {
         httpJson.sendGetRequest(overpassUrl, new HTTPJson.OnResponseListener() {
             @Override
             public void onResponse(String response) {
+                ArrayList<Park> parksArray = new ArrayList<>();
                 try {
                     JSONObject responseJSON = new JSONObject(response);
                     JSONArray parksArrayJSON = responseJSON.getJSONArray("elements");
                     for(int i = 0; i < parksArrayJSON.length(); i++) {
                         JSONObject park = (JSONObject) parksArrayJSON.get(i);
+                        if(park.getString("type").equals("relation")) continue;
                         Park parkToPush = new Park(park);
                         parksArray.add(parkToPush);
                     }
+                    callback.onParksReceived(parksArray);
                 } catch (JSONException e) {
-                    Log.e("Error", "Error while parsing json" + e.toString());
+                    callback.onError("Error while parsing json" + e.toString());
                 }
-
-                Log.d("Parki", parksArray.toString());
-                Log.d("Parki", String.valueOf(parksArray.size()));
             }
 
             @Override
             public void onError(String error) {
-                Log.e("Błąd", error);
+                callback.onError(error);
             }
         });
-        return parksArray;
     }
 }
+
