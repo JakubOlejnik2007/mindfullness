@@ -4,7 +4,7 @@ import android.location.Location;
 import android.util.Log;
 
 import com.example.mindfullness.types.Park;
-
+import com.example.mindfullness.types.Park.OnParkInitializedListener;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -41,13 +41,22 @@ public class GetNearbyParks {
                 try {
                     JSONObject responseJSON = new JSONObject(response);
                     JSONArray parksArrayJSON = responseJSON.getJSONArray("elements");
-                    for(int i = 0; i < parksArrayJSON.length(); i++) {
+                    for (int i = 0; i < parksArrayJSON.length(); i++) {
                         JSONObject park = (JSONObject) parksArrayJSON.get(i);
-                        if(park.getString("type").equals("relation")) continue;
-                        Park parkToPush = new Park(park);
-                        parksArray.add(parkToPush);
+                        if (park.getString("type").equals("relation")) continue;
+                        // Dodaj argument OnParkInitializedListener
+                        Park parkToPush = new Park(park, new OnParkInitializedListener() {
+                            @Override
+                            public void onParkInitialized(Park park) {
+                                // Po zakończeniu inicjalizacji obiektu Park, dodaj go do listy
+                                parksArray.add(park);
+                                // Jeśli wszystkie parki zostały dodane, wywołaj callback.onParksReceived
+                                if (parksArray.size() == parksArrayJSON.length()) {
+                                    callback.onParksReceived(parksArray);
+                                }
+                            }
+                        });
                     }
-                    callback.onParksReceived(parksArray);
                 } catch (JSONException e) {
                     callback.onError("Error while parsing json" + e.toString());
                 }

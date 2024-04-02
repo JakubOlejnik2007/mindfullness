@@ -7,11 +7,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.NamedNodeMap;
-import org.w3c.dom.Node;
 import org.xml.sax.InputSource;
-
-import com.example.mindfullness.helpers.HTTPXML;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -31,63 +27,69 @@ public class Park {
     private double longitude;
     private String name;
 
-    public Park(JSONObject parkObject) throws JSONException {
+    public interface OnParkInitializedListener {
+        void onParkInitialized(Park park);
+    }
+
+    public Park(JSONObject parkObject, OnParkInitializedListener listener) throws JSONException {
         Log.d("Parki", parkObject.getString("type"));
         switch (parkObject.getString("type")) {
             case "node":
                 initFromNode(parkObject);
+                listener.onParkInitialized(this);
                 break;
             case "way":
-                initFromWay(parkObject);
+                initFromWay(parkObject, listener);
                 break;
             case "relation":
                 initFromRelation(parkObject);
+                listener.onParkInitialized(this);
                 break;
         }
+
+        Log.d("Parki1", this.getParkInfo());
     }
 
     private ExecutorService executor = Executors.newSingleThreadExecutor();
 
-    private void initFromWay(JSONObject wayObject) throws JSONException {
+    private void initFromWay(final JSONObject wayObject, OnParkInitializedListener listener) throws JSONException {
         JSONArray nodes = wayObject.getJSONArray("nodes");
         final double[] sumLat = {0};
         final double[] sumLon = {0};
         final int[] nodeCount = {0};
         for (int i = 0; i < nodes.length(); i++) {
-            Log.d("Nodes", String.valueOf(i));
-            long nodeId = nodes.getLong(i);
-            fetchNodeInfoAsync(nodeId, new NodeInfoCallback() {
-                @Override
-                public void onNodeInfoReceived(Double[] nodeInfo) {
+            final int finalI = i;
+            executor.execute(() -> {
+                try {
+                    long nodeId = nodes.getLong(finalI);
+                    Double[] nodeInfo = fetchNodeInfo(nodeId);
                     if (nodeInfo != null) {
-                        sumLat[0] += nodeInfo[0];
-                        sumLon[0] += nodeInfo[1];
-                        nodeCount[0]++;
+                        synchronized (this) {
+                            sumLat[0] += nodeInfo[0];
+                            sumLon[0] += nodeInfo[1];
+                            nodeCount[0]++;
+                            if (nodeCount[0] == nodes.length()) {
+                                if (nodeCount[0] > 0) {
+                                    latitude = sumLat[0] / nodeCount[0];
+                                    longitude = sumLon[0] / nodeCount[0];
+                                }
+                                synchronized (wayObject) {
+                                    try {
+                                        JSONObject tags = wayObject.getJSONObject("tags");
+                                        name = tags.has("name") ? tags.getString("name") : "Park bez nazwy";
+                                        listener.onParkInitialized(this);
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            }
+                        }
                     }
-                    if (nodeCount[0] == nodes.length()) {
-                        if (nodeCount[0] > 0) {
-                            latitude = sumLat[0] / nodeCount[0];
-                            longitude = sumLon[0] / nodeCount[0];
-                        } else {}
-                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
             });
         }
-        JSONObject tags = wayObject.getJSONObject("tags");
-        this.name = tags.has("name") ? tags.getString("name") : "Park bez nazwy";
-    }
-
-    private void fetchNodeInfoAsync(long nodeId, NodeInfoCallback callback) {
-        executor.execute(() -> {
-            try {
-                Double[] nodeInfo = fetchNodeInfo(nodeId);
-                callback.onNodeInfoReceived(nodeInfo);
-            } catch (Exception e) {
-                e.printStackTrace();
-                // Handle error
-                callback.onNodeInfoReceived(null);
-            }
-        });
     }
 
     private Double[] fetchNodeInfo(long nodeId) throws IOException, Exception {
@@ -128,11 +130,6 @@ public class Park {
             }
         }
     }
-
-    interface NodeInfoCallback {
-        void onNodeInfoReceived(Double[] nodeInfo);
-    }
-
 
     private void initFromNode(JSONObject nodeObject) throws JSONException {
         this.latitude = nodeObject.getDouble("lat");
@@ -178,5 +175,3 @@ public class Park {
         return String.format("%s, %.2f, %.2f", this.name, this.latitude, this.longitude);
     }
 }
-
-

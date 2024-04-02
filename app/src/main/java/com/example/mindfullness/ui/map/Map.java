@@ -50,10 +50,6 @@ public class Map extends Fragment {
         return root;
     }
 
-    private interface ParksCallback {
-        void onParksReceived(ArrayList<Park> parksArray);
-    }
-
     private void getLocation() {
         if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
