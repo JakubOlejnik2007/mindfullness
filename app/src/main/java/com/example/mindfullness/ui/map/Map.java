@@ -68,7 +68,7 @@ public class Map extends Fragment {
                             currentLocation = locationResult.getLastLocation();
                             MapView map = binding.map;
                             map.getController().setCenter(new GeoPoint(currentLocation.getLatitude(), currentLocation.getLongitude()));
-                            map.getController().setZoom(15);
+                            map.getController().setZoom(10);
                             Log.d("Mapa", String.valueOf(currentLocation.getLatitude()));
                             Log.d("Mapa", String.valueOf(currentLocation.getLongitude()));
                             fusedLocationClient.removeLocationUpdates(this);
