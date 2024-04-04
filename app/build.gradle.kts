@@ -35,6 +35,7 @@ android {
 }
 
 dependencies {
+    implementation ("org.mongodb:mongodb-driver-sync:5.0.1")
     implementation ("org.osmdroid:osmdroid-android:6.1.11")
     implementation ("com.google.android.gms:play-services-location:21.2.0")
     implementation ("com.squareup.picasso:picasso:2.8")
