@@ -31,7 +31,7 @@ public class Home extends Fragment {
         View root = binding.getRoot();
 
         final TextView textView = binding.textHome;
-        textView.setText("This is home fragment");
+        textView.setText("Witaj!");
 
         // Dodanie menedżera układu do RecyclerView
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
