@@ -19,6 +19,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+
+
+
 import java.util.ArrayList;
 
 public class Home extends Fragment {
@@ -38,6 +41,15 @@ public class Home extends Fragment {
         binding.articlesView.setLayoutManager(layoutManager);
 
         displayArticles();
+
+
+
+
+
+
+
+
+
 
         return root;
     }
