@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "69499605940",
+    "project_id": "mindfullnessapp",
+    "storage_bucket": "mindfullnessapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:69499605940:android:487bb19adc112e6ce918e1",
+        "android_client_info": {
+          "package_name": "com.example.mindfullness"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1bGGrCS6smJaqVbo2mDcUWOmE169vjX4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -11,8 +11,9 @@ public class Article {
     public String content;
     public String imageUrl;
 
-    public Article(String title, String content, String imageUrl) {
+    public Article(String title, String description, String content, String imageUrl) {
         this.title = title;
+        this.description = description;
         this.content = content;
         this.imageUrl = imageUrl;
     }
