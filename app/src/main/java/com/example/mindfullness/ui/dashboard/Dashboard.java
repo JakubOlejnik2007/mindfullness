@@ -33,7 +33,7 @@ public class Dashboard extends Fragment {
         String name = userData[0];
         String email = userData[1];
         int rangeProgress = Integer.parseInt(userData[2]);
-
+        binding.currentFrequency.setText(String.format("%.1f%s", rangeProgress >= 60 ? (float) rangeProgress / 60 : (float) rangeProgress, rangeProgress >= 60 ? "h" : "m"));
         if (name.isEmpty() || email.isEmpty()) {
             nameTextView.setText("Brak danych");
             emailTextView.setText("Brak danych");
@@ -53,7 +53,7 @@ public class Dashboard extends Fragment {
         return new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-
+                binding.currentFrequency.setText(String.format("%.1f%s", progress >= 60 ? (float) progress / 60 : (float) progress, progress >= 60 ? "h" : "m"));
             }
 
             @Override
