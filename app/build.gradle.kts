@@ -36,6 +36,7 @@ android {
 }
 
 dependencies {
+    implementation ("androidx.work:work-runtime:2.9.0")
     implementation (platform("com.google.firebase:firebase-bom:32.8.0"))
     implementation("com.google.firebase:firebase-analytics")
     implementation ("com.google.firebase:firebase-firestore:24.11.0")
