@@ -13,6 +13,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
+        android:fontFamily="sans-serif-black"
         android:text="Konto"
         android:textAlignment="center"
         android:textColor="#000000"
@@ -35,50 +36,99 @@
         app:layout_constraintTop_toBottomOf="@+id/textDashboard"
         app:layout_constraintVertical_bias="0.0" />
 
+
     <TextView
         android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:text="imie (plejs holder)"
+        android:layout_marginTop="52dp"
+        android:fontFamily="sans-serif-black"
+        android:text="Imię"
+        android:textColor="@color/darkerAccent"
+        android:textSize="45sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.695"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textDashboard" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="129dp"
+        android:layout_height="131dp"
+        android:backgroundTint="#000000"
+        android:foregroundTint="#000000"
+        android:src="@drawable/user"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.273"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textDashboard"
+        app:layout_constraintVertical_bias="0.112"
+        app:tint="@color/darkerAccent" />
 
     <TextView
         android:id="@+id/email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="e-mail (plejs holder)"
+        android:layout_marginTop="5dp"
+        android:fontFamily="sans-serif-black"
+        android:text="E-mail"
+        android:textColor="@color/darkerAccent"
+        android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.519"
+        app:layout_constraintHorizontal_bias="0.688"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/name" />
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="272dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="częstotliwoć powiadomień"
+        android:textColor="@color/darkerAccent"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="125dp"
+        android:layout_height="50dp"
+        android:background="@drawable/ed72"
+        android:fontFamily="sans-serif-medium"
+        android:letterSpacing="0.05"
+        android:text="Wyloguj"
+        android:textAllCaps="false"
+        android:textColor="@color/darkerAccent"
+        android:textSize="17sp"
+        app:backgroundTint="@color/teal_700"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textDashboard"
+        app:layout_constraintVertical_bias="0.39" />
 
     <SeekBar
         android:id="@+id/seekBar"
         android:layout_width="100dp"
         android:layout_height="50dp"
+        android:backgroundTint="#BDBDBD"
+        android:foregroundTint="#7E7E7E"
         android:min="15"
-        android:progress="60"
-        android:max="100"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.456" />
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="444dp"
-        android:text="Wyloguj"
+        android:progress="100"
+        android:progressTint="#2AA177"
+        android:secondaryProgressTint="#3D7FB1"
+        android:thumbTint="#237681"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.488"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintVertical_bias="0.073" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.76" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
