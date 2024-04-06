@@ -44,6 +44,7 @@ public class Home extends Fragment {
         final TextView textView = binding.textHome;
         textView.setText("Witaj!");
 
+
         // Dodanie menedżera układu do RecyclerView
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         binding.articlesView.setLayoutManager(layoutManager);
@@ -59,6 +60,7 @@ public class Home extends Fragment {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
+                            articles = new ArrayList<>();
                             // Przetwarzanie wyników pobrania
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 articles.add(new Article(document.getString("title"), document.getString("description"), document.getString("content"), document.getString("thumbnail")));
