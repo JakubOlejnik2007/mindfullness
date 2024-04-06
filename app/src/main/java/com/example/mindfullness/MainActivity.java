@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupNotificationWork() {
         PeriodicWorkRequest notificationWorkRequest =
-                new PeriodicWorkRequest.Builder(NotificationWorker.class, 15, TimeUnit.MINUTES)
+                new PeriodicWorkRequest.Builder(NotificationWorker.class, 60, TimeUnit.MINUTES)
                         .build();
 
         WorkManager.getInstance(this).enqueueUniquePeriodicWork(

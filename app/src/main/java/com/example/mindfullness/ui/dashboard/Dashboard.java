@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -31,21 +32,26 @@ public class Dashboard extends Fragment {
 
         TextView nameTextView = binding.name;
         TextView emailTextView = binding.email;
+        SeekBar range = binding.seekBar;
 
 
         String[] userData = SharedPreferencesManager.readData(getContext());
-        String name = userData[1];
-        String email = userData[2];
+        String name = userData[0];
+        String email = userData[1];
+        int rangeProgress = Integer.parseInt(userData[2]);
 
 
         if (name.isEmpty() || email.isEmpty()) {
             nameTextView.setText("Brak danych");
             emailTextView.setText("Brak danych");
+            range.setProgress(60);
         } else {
-
             nameTextView.setText(name);
             emailTextView.setText(email);
+            range.setProgress(rangeProgress);
         }
+
+
 
         return root;
     }
