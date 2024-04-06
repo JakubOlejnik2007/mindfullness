@@ -21,7 +21,7 @@ public class Dashboard extends Fragment {
         View root = binding.getRoot();
 
         final TextView textView = binding.textDashboard;
-        textView.setText("This is dashboard fragment");
+        textView.setText("Konto");
 
         return root;
     }

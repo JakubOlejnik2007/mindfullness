@@ -21,7 +21,7 @@ public class Notifications extends Fragment {
         View root = binding.getRoot();
 
         final TextView textView = binding.textNotifications;
-        textView.setText("This is notifications fragment");
+        textView.setText("Powiadomienia");
 
         return root;
     }
