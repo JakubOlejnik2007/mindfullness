@@ -117,8 +117,8 @@
 
     <SeekBar
         android:id="@+id/seekBar"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
+        android:layout_width="270dp"
+        android:layout_height="45dp"
         android:backgroundTint="#BDBDBD"
         android:foregroundTint="#7E7E7E"
         android:min="15"
@@ -132,5 +132,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.76" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="15 min                                                   24h"
+        android:textColor="@color/darkAccent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/seekBar"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
