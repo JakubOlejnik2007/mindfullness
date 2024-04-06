@@ -13,7 +13,6 @@ import androidx.fragment.app.Fragment;
 import com.example.mindfullness.databinding.FragmentDashboardBinding;
 import com.example.mindfullness.helpers.SharedPreferencesManager;
 
-
 public class Dashboard extends Fragment {
 
     private FragmentDashboardBinding binding;
@@ -23,23 +22,17 @@ public class Dashboard extends Fragment {
         binding = FragmentDashboardBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-
         final TextView textView = binding.textDashboard;
         textView.setText("Konto");
-
-
-
 
         TextView nameTextView = binding.name;
         TextView emailTextView = binding.email;
         SeekBar range = binding.seekBar;
 
-
         String[] userData = SharedPreferencesManager.readData(getContext());
         String name = userData[0];
         String email = userData[1];
         int rangeProgress = Integer.parseInt(userData[2]);
-
 
         if (name.isEmpty() || email.isEmpty()) {
             nameTextView.setText("Brak danych");
@@ -51,11 +44,27 @@ public class Dashboard extends Fragment {
             range.setProgress(rangeProgress);
         }
 
-
+        range.setOnSeekBarChangeListener(setListener());
 
         return root;
     }
 
+    private SeekBar.OnSeekBarChangeListener setListener() {
+        return new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
+        };
+    }
 
     @Override
     public void onDestroyView() {
