@@ -41,7 +41,7 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
         TextView textViewTitle = holder.itemView.findViewById(R.id.textViewTitle);
         textViewTitle.setText(article.title);
         TextView textViewBody = holder.itemView.findViewById(R.id.textViewBody);
-        textViewBody.setText(article.content);
+        textViewBody.setText(article.description);
         ImageView articleThumbnail = holder.itemView.findViewById(R.id.articleThumbnail);
         article.loadImageIntoImageView(articleThumbnail);
     }
