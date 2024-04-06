@@ -13,6 +13,7 @@ import androidx.core.content.ContextCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
+import androidx.work.BackoffPolicy;
 import androidx.work.ExistingPeriodicWorkPolicy;
 import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkManager;
@@ -34,14 +35,11 @@ public class MainActivity extends AppCompatActivity {
         ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        // Sprawdź, czy aplikacja ma uprawnienie do wysyłania powiadomień
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)
                 != PackageManager.PERMISSION_GRANTED) {
-            // Jeśli aplikacja nie ma uprawnienia, poproś użytkownika o nie
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.POST_NOTIFICATIONS},
                     NOTIFICATION_PERMISSION_REQUEST_CODE);
         } else {
-            // Jeśli aplikacja ma uprawnienie, kontynuuj z ustawianiem pracy cyklicznej
             setupNotificationWork();
         }
 
@@ -68,23 +66,18 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    // Metoda do obsługi odpowiedzi na żądanie uprawnień
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == NOTIFICATION_PERMISSION_REQUEST_CODE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // Uprawnienie zostało udzielone, kontynuuj z ustawianiem pracy cyklicznej
                 setupNotificationWork();
             } else {
-                // Uprawnienie nie zostało udzielone, poinformuj użytkownika lub podejmij inne działania
                 Toast.makeText(this, "Aplikacja wymaga uprawnienia do wysyłania powiadomień.", Toast.LENGTH_SHORT).show();
             }
         }
     }
 
-    // Metoda do ustawiania pracy cyklicznej i powiadomień
-    // Metoda do ustawiania pracy cyklicznej i powiadomień
     private void setupNotificationWork() {
         PeriodicWorkRequest notificationWorkRequest =
                 new PeriodicWorkRequest.Builder(NotificationWorker.class, 15, TimeUnit.MINUTES)
@@ -95,9 +88,10 @@ public class MainActivity extends AppCompatActivity {
                 ExistingPeriodicWorkPolicy.REPLACE,
                 notificationWorkRequest);
 
-        // Dodanie logu do LogCat po dodaniu oczekiwania na powiadomienie
-        Log.d("NotificationWork", "Dodano oczekiwanie na powiadomienie");
+        Log.d("NotificationWork", "Zaplanowano cykliczne zadanie wysyłające powiadomienie");
     }
+
+
 
 
     private int getTitleResById(int itemId) {
