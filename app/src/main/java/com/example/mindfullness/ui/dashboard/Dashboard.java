@@ -7,10 +7,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
+import com.example.mindfullness.R;
 import com.example.mindfullness.databinding.FragmentDashboardBinding;
 import com.example.mindfullness.helpers.SharedPreferencesManager;
 import com.example.mindfullness.AuthActivity;
@@ -30,8 +34,9 @@ public class Dashboard extends Fragment {
         TextView emailTextView = binding.email;
         SeekBar range = binding.seekBar;
 
-        String[] userData = SharedPreferencesManager.readData(getContext());
+        String[] userData = SharedPreferencesManager.readData(requireContext());
         String name = userData[0];
+        Toast.makeText(requireContext(), name, Toast.LENGTH_SHORT).show();
         String email = userData[1];
         int rangeProgress = Integer.parseInt(userData[2]);
         binding.currentFrequency.setText(String.format("%.1f%s", rangeProgress >= 60 ? (float) rangeProgress / 60 : (float) rangeProgress, rangeProgress >= 60 ? "h" : "m"));
@@ -48,8 +53,16 @@ public class Dashboard extends Fragment {
         }
 
         range.setOnSeekBarChangeListener(setListener());
+        binding.button1.setOnClickListener(this::logout);
+
 
         return root;
+    }
+
+    private void logout(View view) {
+        SharedPreferencesManager.removeNameAndEmail(requireContext());
+        NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_activity_main);
+        navController.navigate(R.id.navigation_home);
     }
 
     private SeekBar.OnSeekBarChangeListener setListener() {
