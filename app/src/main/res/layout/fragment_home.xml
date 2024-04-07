@@ -56,6 +56,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
+                    android:layout_weight="1"
                     android:text="Wyzwania"
                     android:textColor="@color/darkAccent"
                     android:textSize="30sp" />
@@ -63,11 +64,13 @@
                 <TextView
                     android:id="@+id/challangetext"
                     android:layout_width="match_parent"
-                    android:layout_height="146dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="3"
                     android:gravity="center"
                     android:text="Wyzwanie"
                     android:textColor="@color/darkerAccent"
-                    android:textSize="18sp" />
+                    android:textSize="13sp"
+                    android:padding="2sp"/>
 
             </LinearLayout>
 
