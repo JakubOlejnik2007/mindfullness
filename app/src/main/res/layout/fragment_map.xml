@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.map.Map">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -15,14 +16,22 @@
 
         <TextView
             android:id="@+id/text_home"
-            android:layout_width="match_parent"
+            android:layout_width="392dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="32dp"
             android:layout_marginEnd="8dp"
+            android:text="Parki w pobliżu"
             android:textAlignment="center"
-            android:textSize="20sp"
-            android:text="Parki w pobliżu"/>
+            android:textColor="#000000"
+            android:textSize="50sp"
+            android:textStyle="bold" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/darkerAccent" />
 
         <org.osmdroid.views.MapView
             android:id="@+id/map"
