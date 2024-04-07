@@ -74,7 +74,7 @@
         android:text="E-mail"
         android:textColor="@color/darkerAccent"
         android:textSize="25sp"
-        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintBottom_toTopOf="@+id/button1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.688"
         app:layout_constraintStart_toStartOf="parent"
@@ -96,7 +96,7 @@
         app:layout_constraintVertical_bias="0.47000003" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/button1"
         android:layout_width="125dp"
         android:layout_height="50dp"
         android:background="@drawable/ed72"

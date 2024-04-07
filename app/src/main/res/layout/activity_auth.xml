@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AuthActivity">
+    tools:context=".ui.dashboard.Dashboard">
 
     <TextView
         android:id="@+id/textDashboard"
@@ -14,7 +14,7 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
         android:fontFamily="sans-serif-black"
-        android:text="Zaloguj"
+        android:text="placeholder"
         android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="50sp"
@@ -23,7 +23,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
-
 
     <View
         android:id="@+id/view"
@@ -36,39 +35,14 @@
         app:layout_constraintTop_toBottomOf="@+id/textDashboard"
         app:layout_constraintVertical_bias="0.0" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/view"
-        android:orientation="vertical"
-        >
-        <EditText
-            android:id="@+id/emailControl"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="30dp"
-            android:layout_marginVertical="8dp"
-            android:hint="e-mail"
-            />
-        <EditText
-            android:id="@+id/emailConfirmControl"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="30dp"
-            android:enabled="false"
-            android:layout_marginVertical="8dp"
-            android:hint="Potwierdź e-mail"
-            />
-    </LinearLayout>
-
     <Button
-        android:id="@+id/button"
+        android:id="@+id/button1"
         android:layout_width="125dp"
         android:layout_height="50dp"
         android:background="@drawable/ed72"
         android:fontFamily="sans-serif-medium"
         android:letterSpacing="0.05"
-        android:text="Zaloguj"
+        android:text="option1"
         android:textAllCaps="false"
         android:textColor="@color/darkerAccent"
         android:textSize="17sp"
@@ -79,5 +53,69 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textDashboard"
         app:layout_constraintVertical_bias="0.65" />
+
+    <EditText
+        android:id="@+id/Name"
+        android:layout_width="305dp"
+        android:layout_height="54dp"
+        android:background="@drawable/ed72"
+        android:backgroundTint="#36979F"
+        android:ems="10"
+        android:hint="Imię"
+        android:inputType="textEmailAddress"
+        android:padding="10dp"
+        android:textColor="@color/darkerAccent"
+        app:layout_constraintBottom_toTopOf="@+id/button1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textDashboard"
+        app:layout_constraintVertical_bias="0.278" />
+
+    <EditText
+        android:id="@+id/editTextTextPassword"
+        android:layout_width="305dp"
+        android:layout_height="54dp"
+        android:background="@drawable/ed72"
+        android:backgroundTint="#36979F"
+        android:ems="10"
+        android:hint="Hasło"
+        android:inputType="textPassword"
+        android:padding="10dp"
+        android:textColor="@color/darkerAccent"
+        app:layout_constraintBottom_toTopOf="@+id/button1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddress"
+        app:layout_constraintVertical_bias="0.231" />
+
+    <EditText
+        android:id="@+id/editTextTextEmailAddress"
+        android:layout_width="305dp"
+        android:layout_height="54dp"
+        android:background="@drawable/ed72"
+        android:backgroundTint="#36979F"
+        android:ems="10"
+        android:hint="E-mail"
+        android:inputType="textEmailAddress"
+        android:padding="10dp"
+        android:textColor="@color/darkerAccent"
+        app:layout_constraintBottom_toTopOf="@+id/button1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textDashboard"
+        app:layout_constraintVertical_bias="0.528" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#FEFEFE"
+        android:text="option 2"
+        android:textColor="@color/darkerAccent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button1"
+        app:layout_constraintVertical_bias="0.93" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
