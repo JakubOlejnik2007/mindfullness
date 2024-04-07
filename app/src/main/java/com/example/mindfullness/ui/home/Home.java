@@ -1,5 +1,6 @@
 package com.example.mindfullness.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,7 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.mindfullness.databinding.FragmentHomeBinding;
-import com.example.mindfullness.helpers.HTTPJson;
+import com.example.mindfullness.Social;
 import com.example.mindfullness.types.Article;
 import com.example.mindfullness.adapters.ArticleAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -47,11 +48,16 @@ public class Home extends Fragment {
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         binding.articlesView.setLayoutManager(layoutManager);
-
+        binding.opensocials.setOnClickListener(this::openSocialsListener);
         displayArticles();
         displayRandomChallenge();
 
         return root;
+    }
+
+    private void openSocialsListener(View view) {
+        Intent intent = new Intent(requireContext(), Social.class);
+        startActivity(intent);
     }
 
     public void displayArticles() {
