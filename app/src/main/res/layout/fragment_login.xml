@@ -14,7 +14,7 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
         android:fontFamily="sans-serif-black"
-        android:text="Zaloguj"
+        android:text="Zarejestruj"
         android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="50sp"
@@ -42,7 +42,7 @@
         android:background="@drawable/ed72"
         android:fontFamily="sans-serif-medium"
         android:letterSpacing="0.05"
-        android:text="Zaloguj"
+        android:text="Zarejestruj"
         android:textAllCaps="false"
         android:textColor="@color/darkerAccent"
         android:textSize="17sp"
@@ -55,30 +55,67 @@
         app:layout_constraintVertical_bias="0.65" />
 
     <EditText
-        android:id="@+id/editTextTextEmailAddress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/Name"
+        android:layout_width="305dp"
+        android:layout_height="54dp"
+        android:background="@drawable/ed72"
+        android:backgroundTint="#36979F"
         android:ems="10"
-        android:hint="E-mail"
+        android:hint="Imię"
         android:inputType="textEmailAddress"
+        android:padding="10dp"
+        android:textColor="@color/darkerAccent"
         app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textDashboard"
-        app:layout_constraintVertical_bias="0.45" />
+        app:layout_constraintVertical_bias="0.278" />
 
     <EditText
         android:id="@+id/editTextTextPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="305dp"
+        android:layout_height="54dp"
+        android:background="@drawable/ed72"
+        android:backgroundTint="#36979F"
         android:ems="10"
         android:hint="Hasło"
         android:inputType="textPassword"
+        android:padding="10dp"
+        android:textColor="@color/darkerAccent"
         app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddress"
-        app:layout_constraintVertical_bias="0.18" />
+        app:layout_constraintVertical_bias="0.231" />
+
+    <EditText
+        android:id="@+id/editTextTextEmailAddress"
+        android:layout_width="305dp"
+        android:layout_height="54dp"
+        android:background="@drawable/ed72"
+        android:backgroundTint="#36979F"
+        android:ems="10"
+        android:hint="E-mail"
+        android:inputType="textEmailAddress"
+        android:padding="10dp"
+        android:textColor="@color/darkerAccent"
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textDashboard"
+        app:layout_constraintVertical_bias="0.528" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#FEFEFE"
+        android:text="Zaloguj"
+        android:textColor="@color/darkerAccent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button"
+        app:layout_constraintVertical_bias="0.93" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
