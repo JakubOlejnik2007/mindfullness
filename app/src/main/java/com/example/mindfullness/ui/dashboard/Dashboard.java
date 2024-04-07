@@ -34,12 +34,13 @@ public class Dashboard extends Fragment {
         TextView emailTextView = binding.email;
         SeekBar range = binding.seekBar;
 
+        range.setProgress(60);
         String[] userData = SharedPreferencesManager.readData(requireContext());
         String name = userData[0];
         Toast.makeText(requireContext(), name, Toast.LENGTH_SHORT).show();
         String email = userData[1];
         int rangeProgress = Integer.parseInt(userData[2]);
-        binding.currentFrequency.setText(String.format("%.1f%s", rangeProgress >= 60 ? (float) rangeProgress / 60 : (float) rangeProgress, rangeProgress >= 60 ? "h" : "m"));
+        binding.currentFrequency.setText("1.0h");
         if (name.isEmpty() || email.isEmpty()) {
             Intent intent = new Intent(requireContext(), AuthActivity.class);
             startActivity(intent);

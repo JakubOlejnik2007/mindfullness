@@ -16,6 +16,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.example.mindfullness.helpers.SharedPreferencesManager;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -74,20 +76,35 @@ public class AuthActivity extends AppCompatActivity {
     private void logIn() {
         FirebaseApp.initializeApp(this);
         FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        String email = emailEdixtText.getText().toString().trim();
+        String password = passwordEditText.getText().toString().trim();
+
+        if (email.isEmpty() || password.isEmpty()) {
+            Toast.makeText(this, "Wypełnij wszystkie pola", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         db.collection("users")
-                .whereEqualTo("email", emailEdixtText.getText().toString().trim())
-                .whereEqualTo("password", passwordEditText.getText().toString().trim())
+                .whereEqualTo("email", email)
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     for (QueryDocumentSnapshot document: queryDocumentSnapshots) {
-                        Log.d("Auth", document.getString("name"));
-                        SharedPreferencesManager.saveData(this, document.getString("name"), document.getString("email"), Integer.parseInt(SharedPreferencesManager.readData(this)[2]));
-                        Intent intent = new Intent(this, MainActivity.class);
-                        startActivity(intent);
+                        String hashedPasswordFromDB = document.getString("password");
+
+                        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+                        if (encoder.matches(password, hashedPasswordFromDB)) {
+                            String name = document.getString("name");
+                            SharedPreferencesManager.saveData(this, name, email, 0);
+                            Intent intent = new Intent(this, MainActivity.class);
+                            startActivity(intent);
+                        } else {
+                            showError("Nieprawidłowe dane logowania");
+                        }
                     }
                 })
                 .addOnFailureListener(e -> {
-                    showError("Błąd podczas logowania!");
+                    showError("Błąd podczas logowania");
                 });
     }
 
@@ -95,33 +112,31 @@ public class AuthActivity extends AppCompatActivity {
         FirebaseApp.initializeApp(this);
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        // Pobierz dane z pól EditText
         String name = nameEditText.getText().toString().trim();
         String email = emailEdixtText.getText().toString().trim();
         String password = passwordEditText.getText().toString().trim();
 
-        // Sprawdź, czy pola są wypełnione
         if (name.isEmpty() || email.isEmpty() || password.isEmpty()) {
             Toast.makeText(this, "Wypełnij wszystkie pola", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        // Sprawdź, czy użytkownik już istnieje w bazie danych
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        String hashedPassword = encoder.encode(password);
+
         db.collection("users")
                 .whereEqualTo("email", email)
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     if (queryDocumentSnapshots.isEmpty()) {
-                        // Jeśli użytkownik nie istnieje, zarejestruj nowego użytkownika
                         Map<String, Object> user = new HashMap<>();
                         user.put("name", name);
                         user.put("email", email);
-                        user.put("password", password);
+                        user.put("password", hashedPassword);
 
                         db.collection("users")
                                 .add(user)
                                 .addOnSuccessListener(documentReference -> {
-                                    // Rejestracja zakończona sukcesem, przejdź do MainActivity
                                     SharedPreferencesManager.saveData(this, name, email, 0); // Tutaj może być inny sposób przechowywania danych, zależy to od Ciebie
                                     Intent intent = new Intent(this, MainActivity.class);
                                     startActivity(intent);
@@ -130,7 +145,6 @@ public class AuthActivity extends AppCompatActivity {
                                     showError("Błąd podczas dodawania");
                                 });
                     } else {
-                        // Jeśli użytkownik już istnieje, wyświetl komunikat o błędzie
                         showError("Użytkownik o podanym adresie email już istnieje");
                     }
                 })

@@ -36,6 +36,7 @@ android {
 }
 
 dependencies {
+    implementation ("org.springframework.security:spring-security-crypto:5.5.0")
     implementation ("com.android.databinding:compiler:3.1.4")
     implementation ("androidx.work:work-runtime:2.9.0")
     implementation (platform("com.google.firebase:firebase-bom:32.8.0"))
