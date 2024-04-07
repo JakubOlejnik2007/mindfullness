@@ -1,5 +1,6 @@
 package com.example.mindfullness;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -19,8 +20,11 @@ import com.example.mindfullness.adapters.EntryAdapter;
 import com.example.mindfullness.helpers.SharedPreferencesManager;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 
 public class Social extends AppCompatActivity {
@@ -35,6 +39,12 @@ public class Social extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_social);
 
+        if(Objects.equals(SharedPreferencesManager.readData(this)[0], "")) {
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        }
+
+
         entries = new ArrayList<>();
         recyclerView = findViewById(R.id.recyclerViewEntries);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -44,6 +54,8 @@ public class Social extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
 
         getEntriesFromFirebase();
+
+
 
         Button button = findViewById(R.id.button);
         button.setOnClickListener(this::handleSendMessage);
@@ -60,13 +72,22 @@ public class Social extends AppCompatActivity {
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
+                        List<Entry> tempEntries = new ArrayList<>();
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             String username = document.getString("username");
                             String content = document.getString("content");
                             long timestamp = document.getTimestamp("timestamp").getSeconds() * 1000;
                             Entry entry = new Entry(username, content, new Date(timestamp));
-                            entries.add(entry);
+                            tempEntries.add(entry);
                         }
+                        Collections.sort(tempEntries, new Comparator<Entry>() {
+
+                            public int compare(Entry entry1, Entry entry2) {
+                                return entry2.timestamp.compareTo(entry1.timestamp);
+                            }
+                        });
+                        entries.clear();
+                        entries.addAll(tempEntries);
                         entryAdapter.notifyDataSetChanged();
                     }
                 });
