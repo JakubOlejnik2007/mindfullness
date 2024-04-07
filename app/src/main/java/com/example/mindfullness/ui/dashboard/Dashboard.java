@@ -1,5 +1,6 @@
 package com.example.mindfullness.ui.dashboard;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +13,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.mindfullness.databinding.FragmentDashboardBinding;
 import com.example.mindfullness.helpers.SharedPreferencesManager;
-
+import com.example.mindfullness.AuthActivity;
 public class Dashboard extends Fragment {
 
     private FragmentDashboardBinding binding;
@@ -35,6 +36,8 @@ public class Dashboard extends Fragment {
         int rangeProgress = Integer.parseInt(userData[2]);
         binding.currentFrequency.setText(String.format("%.1f%s", rangeProgress >= 60 ? (float) rangeProgress / 60 : (float) rangeProgress, rangeProgress >= 60 ? "h" : "m"));
         if (name.isEmpty() || email.isEmpty()) {
+            Intent intent = new Intent(requireContext(), AuthActivity.class);
+            startActivity(intent);
             nameTextView.setText("Brak danych");
             emailTextView.setText("Brak danych");
             range.setProgress(60);

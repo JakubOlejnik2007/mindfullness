@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.dashboard.Dashboard">
+    tools:context=".AuthActivity">
 
     <TextView
         android:id="@+id/textDashboard"
@@ -36,6 +36,30 @@
         app:layout_constraintTop_toBottomOf="@+id/textDashboard"
         app:layout_constraintVertical_bias="0.0" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/view"
+        android:orientation="vertical"
+        >
+        <EditText
+            android:id="@+id/emailControl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginVertical="8dp"
+            android:hint="e-mail"
+            />
+        <EditText
+            android:id="@+id/emailConfirmControl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:enabled="false"
+            android:layout_marginVertical="8dp"
+            android:hint="Potwierdź e-mail"
+            />
+    </LinearLayout>
 
     <Button
         android:id="@+id/button"
