@@ -47,11 +47,13 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/ed72"
+                android:backgroundTint="@color/teal_700"
                 android:ems="10"
                 android:hint="O czym teraz myślisz?"
                 android:inputType="text"
                 android:padding="13dp"
-                android:textColorHint="#7400513A" />
+                android:textColor="@color/darkAccent"
+                android:textColorHint="#74233537" />
 
             <Button
                 android:id="@+id/button"
