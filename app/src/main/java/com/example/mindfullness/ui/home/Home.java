@@ -28,6 +28,7 @@ import org.json.JSONObject;
 
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Home extends Fragment {
 
@@ -48,7 +49,7 @@ public class Home extends Fragment {
         binding.articlesView.setLayoutManager(layoutManager);
 
         displayArticles();
-
+        displayRandomChallenge();
 
         return root;
     }
@@ -77,6 +78,23 @@ public class Home extends Fragment {
                         }
                     }
                 });
+    }
+
+    private void displayRandomChallenge() {
+        String[] wyzwaniaMindfulness = {
+                "Zatrzymaj się na chwilę i skoncentruj się na oddechu przez 5 minut.",
+                "Spójrz na swój otaczający świat i zidentyfikuj pięć rzeczy, które dostrzegasz, czujesz, słyszysz i wąchasz.",
+                "Przeprowadź 10-minutową praktykę wdzięczności, wymieniając trzy rzeczy, za które jesteś dziś wdzięczny/a.",
+                "Zanurz się w chwili teraźniejszej, zwracając uwagę na swoje zmysły: co teraz słyszysz, widzisz, czujesz?",
+                "Wykonaj ćwiczenie skupienia uwagi, licząc oddechy od 1 do 10, starając się skoncentrować tylko na oddechu.",
+                "Zaplanuj krótką przerwę w ciągu dnia, aby zrobić coś, co sprawia ci przyjemność, bez pośpiechu i bez myślenia o innych obowiązkach.",
+                "Przypomnij sobie swoje cele i zastanów się, co możesz dzisiaj zrobić, aby się do nich zbliżyć.",
+                "Zanurz się w naturze przez kilka minut, oddychając świeże powietrze i dostrzegając piękno otaczającego cię świata.",
+                "Zrób sobie przerwę od ekranu przez co najmniej godzinę, skupiając się na aktywnościach, które nie wymagają korzystania z urządzeń elektronicznych.",
+                "Praktykuj akceptację, starając się zaakceptować swoje myśli, emocje i doświadczenia bez oceniania czy krytyki."
+        };
+        Random random = new Random();
+        binding.challangetext.setText(wyzwaniaMindfulness[random.nextInt()%10]);
     }
 
     @Override
