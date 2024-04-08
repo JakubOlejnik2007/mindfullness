@@ -37,7 +37,6 @@ public class Dashboard extends Fragment {
         range.setProgress(60);
         String[] userData = SharedPreferencesManager.readData(requireContext());
         String name = userData[0];
-        Toast.makeText(requireContext(), name, Toast.LENGTH_SHORT).show();
         String email = userData[1];
         int rangeProgress = Integer.parseInt(userData[2]);
         binding.currentFrequency.setText("1.0h");
